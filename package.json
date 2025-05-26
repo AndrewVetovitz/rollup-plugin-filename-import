@@ -1,0 +1,83 @@
+{
+  "name": "rollup-plugin-quick-import",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Import files directly by filename",
+  "license": "MIT",
+  "repository": {
+    "url": "TODO",
+    "directory": "TODO"
+  },
+  "author": "Andrew Vetovitz",
+  "type": "module",
+  "homepage": "TODO",
+  "bugs": "TODO",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "exports": {
+    "types": "./types/index.d.ts",
+    "import": "./dist/es/index.js",
+    "default": "./dist/cjs/index.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "ci:coverage": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov",
+    "ci:lint": "npm run build && npm run lint",
+    "ci:lint:commits": "commitlint --from=${CIRCLE_BRANCH} --to=${CIRCLE_SHA1}",
+    "ci:test": "npm run test -- --verbose",
+    "prebuild": "del-cli dist",
+    "prepare": "if [ ! -d 'dist' ]; then npm run build; fi",
+    "prerelease": "npm run build",
+    "pretest": "npm run build",
+    "release": "npm run --workspace-root package:release $(pwd)",
+    "test": "ava",
+    "test:ts": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.map",
+    "types",
+    "README.md"
+  ],
+  "keywords": [
+    "rollup",
+    "plugin",
+    "alias",
+    "imports"
+  ],
+  "peerDependencies": {
+    "rollup": "^1.20.0||^2.0.0||^3.0.0||^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "rollup": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^5.1.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-buble": "^1.0.3",
+    "@types/node": "^22.15.21",
+    "ava": "^6.3.0",
+    "del-cli": "6.0.0",
+    "nyc": "^17.1.0",
+    "rollup": "^4.41.1",
+    "typescript": "^5.8.3"
+  },
+  "types": "./types/index.d.ts",
+  "ava": {
+    "files": [
+      "!**/fixtures/**",
+      "!**/output/**",
+      "!**/helpers/**",
+      "!**/recipes/**",
+      "!**/types.ts"
+    ]
+  }
+}
