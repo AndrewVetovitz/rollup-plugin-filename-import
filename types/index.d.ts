@@ -1,4 +1,4 @@
-import { Plugin } from 'rollup';
+import { Plugin } from "rollup";
 
 export interface RollupJsonOptions {}
 

@@ -1,5 +1,5 @@
-import test from 'ava';
+import test from "ava";
 
-test('some test', async (t) => {
-    t.pass();
-})
+test("test suit", async (t) => {
+  t.pass();
+});
